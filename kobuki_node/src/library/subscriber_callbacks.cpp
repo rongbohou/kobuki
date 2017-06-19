@@ -49,7 +49,7 @@ namespace kobuki
 /*****************************************************************************
  ** Implementation
  *****************************************************************************/
-
+// 订阅 速度指令并发送到底座
 void KobukiRos::subscribeVelocityCommand(const geometry_msgs::TwistConstPtr msg)
 {
   if (kobuki.isEnabled())

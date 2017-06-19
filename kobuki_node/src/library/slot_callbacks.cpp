@@ -94,7 +94,7 @@ void KobukiRos::publishSensorState()
     }
   }
 }
-
+// 利用编码器数据计算运动，并发布里程数据
 void KobukiRos::publishWheelState()
 {
   // Take latest encoders and gyro data

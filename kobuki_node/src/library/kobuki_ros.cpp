@@ -178,9 +178,9 @@ bool KobukiRos::init(ros::NodeHandle& nh)
   joint_states.effort.resize(2,0.0);
 
   /*********************
-   ** Validation
+   ** Validation 确认、校验
    **********************/
-  if (!parameters.validate())
+  if (!parameters.validate())  // 实际do nothing，直接返回true
   {
     ROS_ERROR_STREAM("Kobuki : parameter configuration failed [" << name << "].");
     ROS_ERROR_STREAM("Kobuki : " << parameters.error_msg << "[" << name << "]");
@@ -199,11 +199,12 @@ bool KobukiRos::init(ros::NodeHandle& nh)
       ROS_INFO_STREAM("Kobuki : driver running in normal (non-simulation) mode" << " [" << name << "].");
     }
   }
-
+  
+ // cmd_vel_timed_out; publish_tf; use_imu_heading; odom_frame; base_frame 参数设置
   odometry.init(nh, name);
 
   /*********************
-   ** Driver Init
+   ** Driver Init 驱动初始化，建立与底座的链接
    **********************/
   try
   {
@@ -240,8 +241,10 @@ bool KobukiRos::init(ros::NodeHandle& nh)
  * This is a worker function that runs in a background thread initiated by
  * the nodelet. It gathers diagnostics information from the kobuki driver,
  * and broadcasts the results to the rest of the ros ecosystem.
- *
+ * 从kobuki driver中采集诊断信息，并发布到ros的其他生态系统
+ * 
  * Note that the actual driver data is collected via the slot callbacks in this class.
+ * 实际上是通过slot callbacks来采集driver data
  *
  * @return Bool : true/false if successfully updated or not (kobuki driver shutdown).
  */

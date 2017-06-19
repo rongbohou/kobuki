@@ -30,6 +30,7 @@ Odometry::Odometry () :
   publish_tf(true)
 {};
 
+ // cmd_vel_timed_out; publish_tf; use_imu_heading; odom_frame; base_frame 参数设置
 void Odometry::init(ros::NodeHandle& nh, const std::string& name) {
   double timeout;
   nh.param("cmd_vel_timeout", timeout, 0.6);
@@ -83,7 +84,7 @@ bool Odometry::commandTimeout() const {
     return false;
   }
 }
-
+// 在KobukiRos::publishWheelState()中用到
 void Odometry::update(const ecl::Pose2D<double> &pose_update, ecl::linear_algebra::Vector3d &pose_update_rates,
                       double imu_heading, double imu_angular_velocity) {
   pose *= pose_update;

@@ -199,7 +199,7 @@ private:
   void publishRawControlCommand(const std::vector<short> &velocity_commands);
 
   /*********************
-  ** Diagnostics
+  ** Diagnostics 诊断
   **********************/
   diagnostic_updater::Updater updater;
   BatteryTask     battery_diagnostics;
